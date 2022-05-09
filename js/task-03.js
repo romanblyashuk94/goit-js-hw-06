@@ -15,16 +15,18 @@ const images = [
 
 const galleryEl = document.querySelector(".gallery");
 
-const galleryItems = images.map((image) => {
-  const galeryItem = document.createElement("li");
-  galeryItem.classList.add("gallery__item");
+const galleryItemsMurkup = createGalleryItemsMurkup(images);
 
-  galeryItem.insertAdjacentHTML(
-    "beforeend",
-    `<img  class = 'galery__image' src = ${image.url} width = '300' alt = ${image.alt}>`
-  );
+galleryEl.insertAdjacentHTML("beforeend", galleryItemsMurkup);
 
-  return galeryItem;
-});
-
-galleryEl.append(...galleryItems);
+function createGalleryItemsMurkup(images) {
+  return images
+    .map(
+      (image) => `
+    <li class = "gallery__item">
+      <img  class = 'galery__image' src = ${image.url} width = '300' alt = ${image.alt}>
+    </li>
+    `
+    )
+    .join("");
+}
